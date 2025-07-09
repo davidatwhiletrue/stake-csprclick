@@ -15,7 +15,7 @@ export default function Stake() {
     const handleStake = async () => {
         const clickRef = window.csprclick;
         const sender = clickRef.getActiveAccount().public_key;
-        debugger;
+
         const proxyBytes = await fetch('/proxy_caller.wasm');
         const contractWasm = new Uint8Array(await proxyBytes.arrayBuffer());
 
@@ -26,8 +26,8 @@ export default function Stake() {
         );
 
         const args = Args.fromMap({
-            amount: CLValue.newCLUInt512(5000000000),
-            attached_value: CLValue.newCLUInt512(5000000000),
+            amount: CLValue.newCLUInt512(500000000000),
+            attached_value: CLValue.newCLUInt512(500000000000),
             entry_point: CLValue.newCLString("stake"),
             package_hash: CLValue.newCLByteArray(Hash.fromHex('20b6b67cc838b43a2168919068c2bedee3ad730d624d86e2e2ae144e902f6de1').toBytes()),
             args: serialized_args,
@@ -45,8 +45,6 @@ export default function Stake() {
 
         clickRef.send(tx, sender)
             .then((res: any) => {
-                console.log("RESULT" , res)
-                debugger
                 if(res?.transactionHash) {
                     setTxHash(res.transactionHash);
                 }
