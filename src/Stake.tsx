@@ -10,6 +10,7 @@ declare global {
 }
 
 export default function Stake() {
+    const [txStatus, setTxStatus] = React.useState<string|null>(null);
     const [txHash, setTxHash]= React.useState<string | null>(null);
 
     const handleStake = async () => {
@@ -43,10 +44,16 @@ export default function Stake() {
 
         const tx = { transaction: { Version1: TransactionV1.toJSON(sessionTransaction.getTransactionV1()!) } };
 
-        clickRef.send(tx, sender)
+        const onStatusUpdate = (status: string, data: any) => {
+            console.log('STATUS UPDATE', status, data);
+            setTxStatus(status);
+        };
+        setTxHash(null);
+        clickRef.send(tx, sender, onStatusUpdate)
             .then((res: any) => {
                 if(res?.transactionHash) {
                     setTxHash(res.transactionHash);
+                    setTxStatus(null);
                 }
             });
     }
@@ -54,8 +61,10 @@ export default function Stake() {
     return (
         <div className="Stake">
             <button onClick={handleStake}>STAKE CSPR</button>
+            {txStatus === 'cancelled' && <div style={{marginTop: '20px'}}>Transaction cancelled</div>}
+            {txStatus === 'sent' && <div style={{marginTop: '20px'}}>Transaction sent</div>}
             <div style={{marginTop: '20px'}}>
-                {txHash && <a href={`https://testnet.cspr.live/deploy/${txHash}`} target="_blank">View transaction</a>}
+                {txHash && <a href={`https://testnet.cspr.live/deploy/${txHash}`} target="_blank" rel="noreferrer">View transaction</a>}
             </div>
         </div>
     );

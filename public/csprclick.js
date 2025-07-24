@@ -49,7 +49,8 @@ const clickUIOptions = {
 const clickSDKOptions = {
     appName: 'CSPR.click demo',
     appId: 'csprclick-template',
-    providers: ['casper-wallet', 'ledger', 'torus-wallet', 'casperdash'],
+    providers: ['casper-wallet', 'ledger', 'metamask-snap'],
+    // csprclickHost: 'https://cspr-click-accounts.dev.make.services',
 };
 
 window.addEventListener('csprclick:loaded', () => {
