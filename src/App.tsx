@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import SCSPRBalance from './SCSPRBalance';
 import Stake from './Stake';
+import APY from "./APY";
 
 function App() {
 
@@ -12,6 +13,9 @@ function App() {
         </div>
         <div style={{marginTop: '50px'}}>
             <SCSPRBalance />
+        </div>
+        <div style={{marginTop: '50px'}}>
+            <APY />
         </div>
     </div>
   );

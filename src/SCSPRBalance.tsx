@@ -1,15 +1,9 @@
 import React from "react";
 import {
-    Args,
-    CLTypeUInt8,
-    CLValue,
-    Hash,
     HttpHandler,
     ParamDictionaryIdentifier,
     ParamDictionaryIdentifierContractNamedKey,
     PublicKey, RpcClient,
-    SessionBuilder,
-    TransactionV1
 } from "casper-js-sdk";
 
 export default function SCSPRBalance() {
