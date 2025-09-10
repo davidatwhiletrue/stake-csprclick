@@ -12,7 +12,7 @@ export default function APY() {
         const apyPercentage =
             supplyRes.data?.total && metricsRes.data?.total_active_era_stake
                 ? Big(supplyRes.data.total)
-                    .mul(8)
+                    .mul(0.25)
                     .div(Big(metricsRes.data.total_active_era_stake).div(1000000000))
                     .toString()
                 : null;
